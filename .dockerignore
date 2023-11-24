@@ -1,0 +1,14 @@
+data
+build
+
+.venv
+.git
+.vscode
+.tensorboard
+.devcontainer
+
+**/*.egg-info
+**/*.pyc
+*.sif
+*.tar
+**/*.ckpt
