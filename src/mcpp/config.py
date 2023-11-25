@@ -10,7 +10,7 @@ class PathConfig:
     repo_root: Path
     data_root: Path
     out_root: Path
-    lang_root: Path
+    lib_root: Path
     log_root: Path
     reports: Path
 
@@ -26,12 +26,20 @@ class TreeSitterConfig:
     libraries: List[Path]
 
 
+
+@dataclass
+class MCPPConfig:
+    in_path: Path
+    out_file: Path
+
+
 @dataclass
 class Config:
     paths: PathConfig
     base: BaseConfig
 
     treesitter: TreeSitterConfig
+    mcpp: MCPPConfig
 
 
 cs = ConfigStore.instance()

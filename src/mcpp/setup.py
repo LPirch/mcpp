@@ -23,7 +23,6 @@ def build(build_path: Path, lib_paths: List[Path]):
             [lib.resolve() for lib in lib_paths]
         )
 
-print(str(REPO_ROOT))
 
 @hydra.main(
     version_base=None,

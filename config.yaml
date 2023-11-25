@@ -23,6 +23,11 @@ treesitter:
     - ${paths.lib_root}/tree-sitter-cpp
 
 
+mcpp:
+  in_path: ${paths.data_root}/CrashMiner/functions
+  out_file: ${paths.out_root}/complexity.json
+
+
 hydra:
   run:
     dir: ${paths.log_root}/mcpp-${now:%Y-%m-%d-%H-%M-%S}

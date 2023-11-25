@@ -1,5 +1,7 @@
 # McCabe++ (mcpp)
 
+<img src="media/mcpp.jpeg" height=400/>
+
 `mcpp` measures typical code complexity metrics like McCabe's cyclomatic
 complexity.
 
