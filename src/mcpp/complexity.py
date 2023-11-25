@@ -2,7 +2,7 @@ from mcpp.parse import Sitter
 from mcpp.queries import Q_FOR_STMT, Q_DO_STMT, Q_WHILE_STMT
 
 
-def c1(path, sitter: Sitter):
+def c2(path, sitter: Sitter):
     """Cyclomatic complexity: number of for, while and do-while loops."""
     queries = {
         "Q_FOR_STMT": Q_FOR_STMT,
