@@ -12,7 +12,7 @@ source code and extract complexity metrics from it.
 
 | Dimension            | ID | Metric Description             |    |
 |----------------------|----|--------------------------------|----|
-| CD1: Function        | C1 | cyclomatic complexity          | 🕒 |
+| CD1: Function        | C1 | cyclomatic complexity          | ✅ |
 | CD2: Loop Structures | C2 | number of loops                | 🕒 |
 |                      | C3 | number of nested loops         | 🕒 |
 |                      | C4 | maximum nesting level of loops | 🕒 |
