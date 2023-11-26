@@ -56,3 +56,11 @@ Q_POINTER_EXPR = """
 Q_ASSIGNMENT_EXPR = """
 (assignment_expression) @assignment
 """
+
+Q_IF_WITHOUT_ELSE = """
+(if_statement
+    condition: ((_) @if)
+    consequence: ((_) @then)
+    !alternative
+) @if_stmt
+"""

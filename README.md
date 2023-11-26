@@ -28,12 +28,11 @@ source code and extract complexity metrics from it.
 |                         | V5  | maximum number of pointer arithmetic operations a variable is involved in | ✅ |
 | VD3: Control Structures | V6  | number of nested control structures                                       | ✅ |
 |                         | V7  | maximum nesting level of control structures                               | ✅ |
-|                         | V8  | maximum number of control-dependent control structures                    | 🕒 |
-|                         | V9  | maximum number of data-dependent control structures                       | 🕒 |
-|                         | V10 | number of if structures without else                                      | 🕒 |
-|                         | V11 | number of variables involved in control predicates                        | 🕒 |
+|                         | V8  | maximum number of control-dependent control structures                    | ✅ |
+|                         | V9  | maximum number of data-dependent control structures                       | ✅ |
+|                         | V10 | number of if structures without else                                      | ✅ |
+|                         | V11 | number of variables involved in control predicates                        | ✅ |
 
-✅ ❌ 🕒
 
 
 ## Setup
