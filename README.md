@@ -21,7 +21,7 @@ source code and extract complexity metrics from it.
 
 | Dimension               | ID  | Metric Description                                                        |    |
 |-------------------------|-----|---------------------------------------------------------------------------|----|
-| VD1: Dependency         | V1  | number of parameter variables                                             | 🕒 |
+| VD1: Dependency         | V1  | number of parameter variables                                             | ✅ |
 |                         | V2  | number of variables as parameters for callee function                     | 🕒 |
 | VD2: Pointers           | V3  | number of pointer arithmetic                                              | 🕒 |
 |                         | V4  | number of variables involved in pointer arithmetic                        | 🕒 |
