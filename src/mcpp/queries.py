@@ -19,3 +19,13 @@ Q_CONDITION = """
 Q_BINARY_EXPRESSION = """
 (binary_expression) @binary_expression
 """
+
+Q_ARGLIST = """
+(call_expression
+    arguments: ((argument_list) @args)
+) @call
+"""
+
+Q_IDENTIFIER = """
+(identifier) @variable
+"""
