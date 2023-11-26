@@ -10,6 +10,15 @@ Q_WHILE_STMT = """
 (while_statement) @while_stmt
 """
 
+Q_IF_STMT = """
+(if_statement) @if_stmt
+"""
+
+Q_SWITCH_STMT = """
+(switch_statement) @switch_stmt
+"""
+
+
 Q_CONDITION = """
 (_
     condition: ((_) @condition)

@@ -8,7 +8,7 @@ from mcpp import REPO_ROOT
 from mcpp.config import Config
 from mcpp.parse import Sitter
 from mcpp.complexity import c1, c2, c3_c4
-from mcpp.vulnerability import v1, v2, v3_v4, v5
+from mcpp.vulnerability import v1, v2, v3_v4, v5, v6
 
 
 @hydra.main(
@@ -30,7 +30,8 @@ def main(cfg: Config):
         v1,
         v2,
         v3_v4,
-        v5
+        v5,
+        v6
     ]
     sitter = Sitter(cfg.treesitter.build_path, "c", "cpp")
     results = defaultdict(dict)
