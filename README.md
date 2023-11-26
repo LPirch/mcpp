@@ -25,7 +25,7 @@ source code and extract complexity metrics from it.
 |                         | V2  | number of variables as parameters for callee function                     | ✅ |
 | VD2: Pointers           | V3  | number of pointer arithmetic                                              | ✅ |
 |                         | V4  | number of variables involved in pointer arithmetic                        | ✅ |
-|                         | V5  | maximum number of pointer arithmetic operations a variable is involved in | 🕒 |
+|                         | V5  | maximum number of pointer arithmetic operations a variable is involved in | ✅ |
 | VD3: Control Structures | V6  | number of nested control structures                                       | 🕒 |
 |                         | V7  | maximum nesting level of control structures                               | 🕒 |
 |                         | V8  | maximum number of control-dependent control structures                    | 🕒 |

@@ -16,8 +16,14 @@ Q_CONDITION = """
 ) @control_stmnt
 """
 
-Q_BINARY_EXPRESSION = """
+Q_BINARY_EXPR = """
 (binary_expression) @binary_expression
+"""
+
+Q_CALL_NAME = """
+(call_expression
+    function: ((identifier) @name)
+) @call
 """
 
 Q_ARGLIST = """
@@ -36,4 +42,8 @@ Q_FUNCTION_PARAMETER = """
 
 Q_POINTER_EXPR = """
 (pointer_expression) @pointer
+"""
+
+Q_ASSIGNMENT_EXPR = """
+(assignment_expression) @assignment
 """

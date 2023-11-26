@@ -1,6 +1,6 @@
 from mcpp.parse import Sitter
 from mcpp.queries import Q_FOR_STMT, Q_DO_STMT, Q_WHILE_STMT, \
-    Q_BINARY_EXPRESSION, Q_CONDITION
+    Q_BINARY_EXPR, Q_CONDITION
 
 
 def c1(path, sitter: Sitter):
@@ -8,7 +8,7 @@ def c1(path, sitter: Sitter):
         number conditional predicates + number of loop statements + 1
     """
     queries = {
-        "Q_BINARY_EXPRESSION": Q_BINARY_EXPRESSION,
+        "Q_BINARY_EXPR": Q_BINARY_EXPR,
         "Q_CONDITION": Q_CONDITION,
         "Q_FOR_STMT": Q_FOR_STMT,
         "Q_DO_STMT": Q_DO_STMT,
@@ -25,7 +25,7 @@ def c1(path, sitter: Sitter):
     complexity = c2(path, sitter)["C2"]
     conditions = sitter.captures("Q_CONDITION", root, lang)
     for condition in conditions:
-        bin_expr = sitter.captures("Q_BINARY_EXPRESSION", root, lang)
+        bin_expr = sitter.captures("Q_BINARY_EXPR", root, lang)
         for expr, _ in bin_expr:
             if len(expr.children) != 3:
                 continue
