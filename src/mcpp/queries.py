@@ -33,3 +33,7 @@ Q_IDENTIFIER = """
 Q_FUNCTION_PARAMETER = """
 (parameter_declaration) @param
 """
+
+Q_POINTER_EXPR = """
+(pointer_expression) @pointer
+"""

@@ -8,7 +8,7 @@ from mcpp import REPO_ROOT
 from mcpp.config import Config
 from mcpp.parse import Sitter
 from mcpp.complexity import c1, c2, c3_c4
-from mcpp.vulnerability import vd1, vd2
+from mcpp.vulnerability import v1, v2, v3_v4
 
 
 @hydra.main(
@@ -23,18 +23,19 @@ def main(cfg: Config):
     else:
         in_files = [cfg.mcpp.in_path]
 
-    metrics = {
-        "C1": c1,
-        "C2": c2,
-        "C3_C4": c3_c4,
-        "VD1": vd1,
-        "VD2": vd2
-    }
+    metrics = [
+        c1,
+        c2,
+        c3_c4,
+        v1,
+        v2,
+        v3_v4
+    ]
     sitter = Sitter(cfg.treesitter.build_path, "c", "cpp")
     results = defaultdict(dict)
     for path in tqdm(in_files):
         res = {}
-        for m, fun in metrics.items():
+        for fun in metrics:
             res.update(fun(path, sitter))
         results[str(path)] = res
 
