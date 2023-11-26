@@ -1,3 +1,7 @@
+Q_ERROR_NODE = """
+(ERROR) @error_node
+"""
+
 Q_FOR_STMT = """
 (for_statement) @for_stmt
 """

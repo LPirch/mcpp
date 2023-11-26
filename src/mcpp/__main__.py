@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 from mcpp import REPO_ROOT
 from mcpp.config import Config
-from mcpp.parse import Sitter
+from mcpp.parse import Sitter, get_call_names
 from mcpp.complexity import c1, c2, c3_c4
 from mcpp.vulnerability import v1, v2, v3_v4, v5, v6_v7, v8, v9, v10, v11
 
@@ -41,8 +41,11 @@ def main(cfg: Config):
     results = defaultdict(dict)
     for path in tqdm(in_files):
         res = {}
+        tree, lang = sitter.parse_file(path)
+        root = tree.root_node
+        calls = set(get_call_names(sitter, root, lang))
         for fun in metrics:
-            res.update(fun(path, sitter))
+            res.update(fun(root, sitter, lang, calls))
         results[str(path)] = res
 
     with open(cfg.mcpp.out_file, "w") as f:

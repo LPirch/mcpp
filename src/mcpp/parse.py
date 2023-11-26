@@ -1,11 +1,8 @@
-# %%
+from dataclasses import dataclass
 from pathlib import Path
 from tree_sitter import Language, Parser
 
-
-Q_ERROR_NODE = """
-(ERROR) @error_node
-"""
+from mcpp.queries import Q_ERROR_NODE, Q_CALL_NAME, Q_IDENTIFIER
 
 class Sitter(object):
     def __init__(self, library_path: Path, *languages):
@@ -53,3 +50,24 @@ class Sitter(object):
     def captures(self, query, node, lang):
         lang = self.langs[lang]
         return lang.query(self.queries[query]).captures(node)
+
+
+def get_call_names(sitter, root, lang):
+    """ Return all function call names. """
+    call_names = []
+    sitter.add_queries({"Q_CALL_NAME": Q_CALL_NAME})
+    for node, tag in sitter.captures("Q_CALL_NAME", root, lang):
+        if tag == "name":
+            call_names.append(node.text.decode())
+    return call_names
+
+
+def get_identifiers(sitter, root, lang, filter=None):
+    """ Return all identifier names, optionally filtered by list of known function names. """
+    identifiers = []
+    sitter.add_queries({"Q_IDENTIFIER": Q_IDENTIFIER})
+    for node, _ in sitter.captures("Q_IDENTIFIER", root, lang):
+        identifier = node.text.decode()
+        if filter is None or identifier not in filter:
+            identifiers.append(identifier)
+    return identifiers
