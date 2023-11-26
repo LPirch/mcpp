@@ -3,7 +3,7 @@ from mcpp.queries import Q_FOR_STMT, Q_DO_STMT, Q_WHILE_STMT, \
     Q_BINARY_EXPRESSION, Q_CONDITION
 
 
-def c1(path, sitter: Sitter, metrics=None):
+def c1(path, sitter: Sitter):
     """Cyclomatic complexity (McCabe): 
         number conditional predicates + number of loop statements + 1
     """
@@ -22,9 +22,7 @@ def c1(path, sitter: Sitter, metrics=None):
     tree, lang = sitter.parse_file(path)
     root = tree.root_node
 
-    if metrics is None:
-        metrics = {}
-    complexity = metrics.get("C2", c2(path, sitter)["C2"])
+    complexity = c2(path, sitter)["C2"]
     conditions = sitter.captures("Q_CONDITION", root, lang)
     for condition in conditions:
         bin_expr = sitter.captures("Q_BINARY_EXPRESSION", root, lang)
@@ -40,7 +38,7 @@ def c1(path, sitter: Sitter, metrics=None):
     }
 
 
-def c2(path, sitter: Sitter, metrics=None):
+def c2(path, sitter: Sitter):
     """number of for, while and do-while loops"""
     queries = {
         "Q_FOR_STMT": Q_FOR_STMT,
@@ -59,7 +57,7 @@ def c2(path, sitter: Sitter, metrics=None):
     }
 
 
-def c3_c4(path, sitter: Sitter, metrics=None):
+def c3_c4(path, sitter: Sitter):
     """
     C3: number of nested for, while and do-while loops
     C4: maximum nesting depth

@@ -29,3 +29,7 @@ Q_ARGLIST = """
 Q_IDENTIFIER = """
 (identifier) @variable
 """
+
+Q_FUNCTION_PARAMETER = """
+(parameter_declaration) @param
+"""
