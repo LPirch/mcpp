@@ -7,7 +7,7 @@ from tqdm import tqdm
 from mcpp import REPO_ROOT
 from mcpp.config import Config
 from mcpp.parse import Sitter
-from mcpp.complexity import c1
+from mcpp.complexity import c1, c2, c3_c4
 
 
 @hydra.main(
@@ -18,17 +18,22 @@ def main(cfg: Config):
     if cfg.mcpp.in_path.is_dir():
         in_files = list(cfg.mcpp.in_path.glob("**/source"))
         from random import choices
-        in_files = choices(in_files, k=1_000)
+        in_files = choices(in_files, k=100)
     else:
         in_files = [cfg.mcpp.in_path]
 
     metrics = {
-        "C1": c1
+        "C1": c1,
+        "C2": c2,
+        "C3_C4": c3_c4
     }
     sitter = Sitter(cfg.treesitter.build_path, "c", "cpp")
     results = defaultdict(dict)
     for path in tqdm(in_files):
-        results[str(path)] = {m: fun(path, sitter) for m, fun in metrics.items()}
+        res = {}
+        for m, fun in metrics.items():
+            res.update(fun(path, sitter, metrics=res))
+        results[str(path)] = res
 
     with open(cfg.mcpp.out_file, "w") as f:
         json.dump(results, f, indent=4)
