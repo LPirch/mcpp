@@ -8,16 +8,10 @@ from hydra.core.config_store import ConfigStore
 @dataclass
 class PathConfig:
     repo_root: Path
+    lib_root: Path
     data_root: Path
     out_root: Path
-    lib_root: Path
     log_root: Path
-    reports: Path
-
-
-@dataclass
-class BaseConfig:
-    jobs: int
 
 
 @dataclass
@@ -26,20 +20,14 @@ class TreeSitterConfig:
     libraries: List[Path]
 
 
-
-@dataclass
-class MCPPConfig:
-    in_path: Path
-    out_file: Path
-
-
 @dataclass
 class Config:
+    in_path: Path
+    out_path: Path
+    metrics: List[str]
     paths: PathConfig
-    base: BaseConfig
-
     treesitter: TreeSitterConfig
-    mcpp: MCPPConfig
+
 
 
 cs = ConfigStore.instance()

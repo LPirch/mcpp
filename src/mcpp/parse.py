@@ -1,12 +1,14 @@
 from dataclasses import dataclass
 from pathlib import Path
 from tree_sitter import Language, Parser
+from importlib.resources import files
 
 from mcpp.queries import Q_ERROR_NODE, Q_CALL_NAME, Q_IDENTIFIER
 
 class Sitter(object):
-    def __init__(self, library_path: Path, *languages):
-        self._library_path = library_path
+    def __init__(self, lib_path: Path, *languages):
+        with files("mcpp.assets") / lib_path.name as p:
+            self._library_path = p
         self.langs = {lang: self._init_lang(lang) for lang in languages}
         self.parser = {lang: self._init_parser(lang) for lang in languages}
         self.queries = {}

@@ -1,0 +1,28 @@
+defaults:
+  - /mcpp.config
+  - _self_
+
+
+in_path: ${paths.data_root}/CrashMiner/functions
+out_path: ${paths.out_root}/complexity.json
+metrics: [C1, C2, C3, C4, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11]
+
+
+paths:
+  repo_root: ${oc.env:REPO_ROOT}
+  lib_root: ${paths.repo_root}/lib
+  data_root: ./data
+  out_root: ./out-data
+  log_root: ${paths.out_root}/logs
+
+
+treesitter:
+  build_path: src/mcpp/assets/tree-sitter.so
+  libraries:
+    - ${paths.lib_root}/tree-sitter-c
+    - ${paths.lib_root}/tree-sitter-cpp
+
+
+hydra:
+  run:
+    dir: ${paths.log_root}/mcpp-${now:%Y-%m-%d-%H-%M-%S}

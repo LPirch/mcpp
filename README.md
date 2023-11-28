@@ -37,15 +37,34 @@ source code and extract complexity metrics from it.
 
 ## Setup
 
+Due to a limitation of setuptools (including external build steps), you need to
+run the `setup` command manually once before installing the package.
+
 ```sh
 pip install -e .
+setup               # builds tree-sitter lib
+pip install
 ```
 
 ## Usage
 
-```sh
-setup       # build tree-sitter libs
-```
-
 Configuration parameters can be changed in `config.yaml` or directly on the CLI
 with e.g. `someCmd paths.out_root=some/dir`.
+
+Using all defaults:
+```sh
+mcpp                # with default params like input directory, see config.yaml
+```
+
+Changing params from command line:
+```sh
+mcpp in_path=/some/dir/single_source out_path=single_source_metrics.json
+mcpp metrics=\[C1,C2,V4\]
+```
+
+Or by passing a changed `config.yaml`:
+- `-cp` (config_path) specifies the absolute path to the directory where the config file is located
+- `-cn` (config_name) specifies the name of the config file
+```sh
+mcpp -cp /some/other/dir -cn myconfig.yaml
+```

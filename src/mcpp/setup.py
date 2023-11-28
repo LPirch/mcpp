@@ -1,3 +1,4 @@
+from importlib.resources import files
 from typing import List
 from pathlib import Path
 import logging
@@ -5,8 +6,12 @@ import logging
 import hydra
 from tree_sitter import Language
 
-from mcpp import REPO_ROOT
 from mcpp.config import Config
+
+
+with files("mcpp.assets") / "config.yaml" as p:
+    config_path = str(p.parent)
+    config_name = str(p.name)
 
 
 def build(build_path: Path, lib_paths: List[Path]):
@@ -26,8 +31,8 @@ def build(build_path: Path, lib_paths: List[Path]):
 
 @hydra.main(
     version_base=None,
-    config_path=str(REPO_ROOT),
-    config_name="config.yaml")
+    config_path=config_path,
+    config_name=config_name)
 def main(cfg: Config):
     build(cfg.treesitter.build_path, cfg.treesitter.libraries)
 

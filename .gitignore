@@ -1,5 +1,7 @@
 data
-build
+out-data
+src/mcpp/assets
+
 
 .venv
 .git
