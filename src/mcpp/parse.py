@@ -8,7 +8,10 @@ from mcpp.queries import Q_ERROR_NODE, Q_CALL_NAME, Q_IDENTIFIER
 class Sitter(object):
     def __init__(self, lib_path: Path, *languages):
         with files("mcpp.assets") / lib_path.name as p:
-            self._library_path = p
+            if p.exists():
+                self._library_path = p
+            else:
+                self._library_path = lib_path
         self.langs = {lang: self._init_lang(lang) for lang in languages}
         self.parser = {lang: self._init_parser(lang) for lang in languages}
         self.queries = {}
