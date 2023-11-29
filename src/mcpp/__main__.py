@@ -3,7 +3,6 @@ from collections import defaultdict
 from importlib.resources import files
 
 import hydra
-from tqdm import tqdm
 
 from mcpp import REPO_ROOT
 from mcpp.config import Config
@@ -56,7 +55,7 @@ def run(cfg: Config):
     metrics = [fun for name, fun in METRICS.items() if name in cfg.metrics]
     sitter = Sitter(cfg.treesitter.build_path, "c", "cpp")
     results = defaultdict(dict)
-    for path in tqdm(in_files):
+    for path in in_files:
         res = {}
         tree, lang = sitter.parse_file(path)
         root = tree.root_node
