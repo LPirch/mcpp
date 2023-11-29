@@ -3,6 +3,7 @@ from collections import defaultdict
 from importlib.resources import files
 
 import hydra
+from tqdm import tqdm
 
 from mcpp import REPO_ROOT
 from mcpp.config import Config
@@ -46,9 +47,7 @@ def main(cfg: Config):
 
 def run(cfg: Config):
     if cfg.in_path.is_dir():
-        in_files = list(cfg.in_path.glob("**/source"))
-        from random import choices
-        in_files = choices(in_files, k=100)
+        in_files = tqdm(list(cfg.in_path.glob("**/source")))
     else:
         in_files = [cfg.in_path]
 
