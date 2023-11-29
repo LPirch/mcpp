@@ -64,6 +64,7 @@ def run(cfg: Config):
         for fun in metrics:
             res.update(fun(root, sitter, lang, calls))
         results[str(path)] = res
+    return results
 
 
 if __name__ == '__main__':
