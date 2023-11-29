@@ -29,6 +29,5 @@ class Config:
     treesitter: TreeSitterConfig
 
 
-
 cs = ConfigStore.instance()
 cs.store(name='mcpp.config', node=Config)

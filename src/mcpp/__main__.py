@@ -39,6 +39,13 @@ METRICS = {
     config_path=config_path,
     config_name=config_name)
 def main(cfg: Config):
+    results = run(config)
+
+    with open(cfg.out_path, "w") as f:
+        json.dump(results, f, indent=4)
+
+
+def run(config: Config):
     if cfg.in_path.is_dir():
         in_files = list(cfg.in_path.glob("**/source"))
         from random import choices
@@ -57,9 +64,6 @@ def main(cfg: Config):
         for fun in metrics:
             res.update(fun(root, sitter, lang, calls))
         results[str(path)] = res
-
-    with open(cfg.out_path, "w") as f:
-        json.dump(results, f, indent=4)
 
 
 if __name__ == '__main__':
