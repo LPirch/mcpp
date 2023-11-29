@@ -45,7 +45,7 @@ def main(cfg: Config):
         json.dump(results, f, indent=4)
 
 
-def run(config: Config):
+def run(cfg: Config):
     if cfg.in_path.is_dir():
         in_files = list(cfg.in_path.glob("**/source"))
         from random import choices
