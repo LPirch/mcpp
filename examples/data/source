@@ -1,0 +1,32 @@
+int somefunc(int a, char* b) {
+	int foo = 0;
+	int* pfoo = &foo;
+
+	for(;;) {
+		for(;;) {
+			;
+		}
+	}
+
+	bar(b, b, b);
+
+	int* c = pfoo + &pfoo;
+
+	if(0) {
+		if(1) {
+			if(2) {
+				;
+			}
+		}
+	}
+
+	if(4) {
+		if(5) {
+			;
+		}
+	}
+
+	if (a + b - foo && a && b && foo) {
+		;
+	}
+}

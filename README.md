@@ -68,3 +68,10 @@ Or by passing a changed `config.yaml`:
 ```sh
 mcpp -cp /some/other/dir -cn myconfig.yaml
 ```
+
+Try out the example:
+
+```sh
+mcpp in_path=examples/data/source paths.out_root=examples/data-out
+cat examples/data-out/complexity.json
+```
