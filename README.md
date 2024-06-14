@@ -37,19 +37,19 @@ source code and extract complexity metrics from it.
 
 ## Setup
 
-Due to a limitation of setuptools (including external build steps), you need to
-run the `setup` command manually once before installing the package.
+Build a docker container which performs the setup automatically or run the
+following steps on your local machine:
 
 ```sh
+git submodule update --init --recursive
 pip install -e .
 setup               # builds tree-sitter lib
-pip install
 ```
 
 ## Usage
 
 Configuration parameters can be changed in `config.yaml` or directly on the CLI
-with e.g. `someCmd paths.out_root=some/dir`.
+with e.g. `mcpp paths.out_root=some/dir`.
 
 Using all defaults:
 ```sh
