@@ -11,7 +11,7 @@ from mcpp.parse import Sitter, get_call_names
 from mcpp.complexity import c1, c2, c3_c4
 from mcpp.vulnerability import v1, v2, v3_v4, v5, v6_v7, v8, v9, v10, v11
 
-with files("mcpp.assets") / "config.yaml" as p:
+with files("mcpp") / "assets" / "config.yaml" as p:
     config_path = str(p.parent)
     config_name = str(p.name)
 
@@ -39,7 +39,7 @@ METRICS = {
     config_path=config_path,
     config_name=config_name)
 def main(cfg: Config):
-    results = run(config)
+    results = run(cfg)
 
     with open(cfg.out_path, "w") as f:
         json.dump(results, f, indent=4)
