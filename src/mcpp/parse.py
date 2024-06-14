@@ -7,7 +7,7 @@ from mcpp.queries import Q_ERROR_NODE, Q_CALL_NAME, Q_IDENTIFIER
 
 class Sitter(object):
     def __init__(self, lib_path: Path, *languages):
-        with files("mcpp.assets") / lib_path.name as p:
+        with files("mcpp") / "assets" / lib_path.name as p:
             if p.exists():
                 self._library_path = p
             else:

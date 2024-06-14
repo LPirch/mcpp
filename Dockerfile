@@ -51,4 +51,6 @@ RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VER
 WORKDIR /mcpp
 COPY . /mcpp
 
+RUN git submodule update --init --recursive
 RUN pip install -e .
+RUN setup

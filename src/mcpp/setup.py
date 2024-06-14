@@ -9,7 +9,7 @@ from tree_sitter import Language
 from mcpp.config import Config
 
 
-with files("mcpp.assets") / "config.yaml" as p:
+with files("mcpp") / "assets" / "config.yaml" as p:
     config_path = str(p.parent)
     config_name = str(p.name)
 
@@ -22,10 +22,10 @@ def build(build_path: Path, lib_paths: List[Path]):
         build_path.parent.mkdir(exist_ok=True, parents=True)
         Language.build_library(
             # Store the library in the `build` directory
-            build_path.resolve(),
+            str(build_path.resolve()),
 
             # Include one or more languages
-            [lib.resolve() for lib in lib_paths]
+            [str(lib.resolve()) for lib in lib_paths]
         )
 
 
