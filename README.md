@@ -6,7 +6,17 @@
 complexity.
 
 The goal of this project is to provide a re-usable script to analyze C/C++
-source code and extract complexity metrics from it.
+source code and extract complexity metrics from it. The implemented metrics
+are taken from the [paper](https://xiaoningdu.github.io/assets/pdf/leopard.pdf)
+
+> LEOPARD: Identifying Vulnerable Code for Vulnerability Assessment through Program Metrics  
+
+This tool is released as part of our research in vulnerability discovery and 
+has been used in our paper
+
+> SoK: Where to Fuzz? Assessing Target Selection Methods in Directed Fuzzing" 
+
+See also the corresponding [repo](https://github.com/wsbrg/crashminer).
 
 ## Complexity Metrics
 
