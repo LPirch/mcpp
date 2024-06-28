@@ -18,7 +18,7 @@ class Sitter(object):
         self.queries = {"Q_ERROR_NODE": Q_ERROR_NODE}
 
     def _init_lang(self, lang: str):
-        return Language(self._library_path, lang)
+        return Language(str(self._library_path), lang)
 
     def _init_parser(self, language: str):
         parser = Parser()
