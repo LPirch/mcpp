@@ -71,5 +71,18 @@ def extract_single(in_file: Path, metrics: List[str]):
     return extract([in_file], metrics)
 
 
+def extract_code(code: str, metrics: List[str] = list(METRICS.keys())):
+    metrics = [fun for name, fun in METRICS.items() if name in metrics]
+    sitter = Sitter("c", "cpp")
+
+    tree, lang = sitter.parse(code)
+    root = tree.root_node
+    calls = set(get_call_names(sitter, root, lang))
+    res = {}
+    for fun in metrics:
+        res.update(fun(root, sitter, lang, calls))
+    return res
+
+
 if __name__ == '__main__':
     main()

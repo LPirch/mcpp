@@ -22,7 +22,6 @@ class Sitter(object):
         self.queries = {}
         self.queries = {"Q_ERROR_NODE": Q_ERROR_NODE}
 
-
     def _init_parser(self, language: str):
         parser = Parser()
         parser.set_language(self.langs[language])
