@@ -1,6 +1,6 @@
 [project]
 name = "mcpp"
-version = "1.1.0"
+version = "1.1.1"
 description = "McCabe++ (mcpp): cyclomatic complexity and other vulnerability-related code metrics"
 readme = "README.md"
 authors = [{name = "Lukas Pirch", email="lukas.pirch@tu-berlin.de"}]

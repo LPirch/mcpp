@@ -1,7 +1,7 @@
 import os
 from importlib import resources
 
-from mcpp.__main__ import extract, extract_single, METRICS
+from mcpp.__main__ import extract, extract_single, extract_code, METRICS
 
 
 with resources.path("mcpp", "__init__.py") as root_path:
