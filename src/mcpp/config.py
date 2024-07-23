@@ -14,11 +14,6 @@ class PathConfig:
     log_root: Path
 
 
-@dataclass
-class TreeSitterConfig:
-    build_path: Path
-    libraries: List[Path]
-
 
 @dataclass
 class Config:
@@ -26,7 +21,6 @@ class Config:
     out_path: Path
     metrics: List[str]
     paths: PathConfig
-    treesitter: TreeSitterConfig
 
 
 cs = ConfigStore.instance()

@@ -1,5 +1,6 @@
 data
 build
+lib
 
 .venv
 .vscode

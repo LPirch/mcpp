@@ -1,17 +1,18 @@
 import json
+from pathlib import Path
+from typing import List
 from collections import defaultdict
 from importlib.resources import files
 
 import hydra
 from tqdm import tqdm
 
-from mcpp import REPO_ROOT
 from mcpp.config import Config
 from mcpp.parse import Sitter, get_call_names
 from mcpp.complexity import c1, c2, c3_c4
 from mcpp.vulnerability import v1, v2, v3_v4, v5, v6_v7, v8, v9, v10, v11
 
-with files("mcpp") / "assets" / "config.yaml" as p:
+with files("mcpp.assets") / "config.yaml" as p:
     config_path = str(p.parent)
     config_name = str(p.name)
 
@@ -34,25 +35,26 @@ METRICS = {
     "V11": v11
 }
 
+
 @hydra.main(
     version_base=None,
     config_path=config_path,
     config_name=config_name)
 def main(cfg: Config):
-    results = run(cfg)
-
-    with open(cfg.out_path, "w") as f:
-        json.dump(results, f, indent=4)
-
-
-def run(cfg: Config):
     if cfg.in_path.is_dir():
         in_files = tqdm(list(cfg.in_path.glob("**/source")))
     else:
         in_files = [cfg.in_path]
 
-    metrics = [fun for name, fun in METRICS.items() if name in cfg.metrics]
-    sitter = Sitter(cfg.treesitter.build_path, "c", "cpp")
+    results = extract(in_files, cfg.metrics)
+
+    with open(cfg.out_path, "w") as f:
+        json.dump(results, f, indent=4)
+
+
+def extract(in_files: List[Path], metrics: List[str] = list(METRICS.keys())):
+    metrics = [fun for name, fun in METRICS.items() if name in metrics]
+    sitter = Sitter("c", "cpp")
     results = defaultdict(dict)
     for path in in_files:
         res = {}
@@ -63,6 +65,10 @@ def run(cfg: Config):
             res.update(fun(root, sitter, lang, calls))
         results[str(path)] = res
     return results
+
+
+def extract_single(in_file: Path, metrics: List[str]):
+    return extract([in_file], metrics)
 
 
 if __name__ == '__main__':

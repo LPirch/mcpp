@@ -1,21 +1,20 @@
 from importlib.resources import files
 from typing import List
 from pathlib import Path
-import logging
 
 import hydra
+from loguru import logger as log
 from tree_sitter import Language
 
 from mcpp.config import Config
 
 
-with files("mcpp") / "assets" / "config.yaml" as p:
+with files("mcpp.assets") / "config.yaml" as p:
     config_path = str(p.parent)
     config_name = str(p.name)
 
 
 def build(build_path: Path, lib_paths: List[Path]):
-    log = logging.getLogger(__name__)
     log.info("building tree-sitter library")
 
     if len(lib_paths) > 0:

@@ -1,3 +1,18 @@
+[project]
+name = "mcpp"
+version = "0.1.1"
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[project.scripts]
+setup = "mcpp.setup:main"
+mcpp = "mcpp.__main__:main"
+
+[tool.setuptools.package-data]
+mcpp = ["assets/*.yaml"]
+
 [build-system]
 requires = [
   "setuptools >= 40.9.0",

@@ -16,13 +16,6 @@ paths:
   log_root: ${paths.out_root}/logs
 
 
-treesitter:
-  build_path: src/mcpp/assets/tree-sitter.so
-  libraries:
-    - ${paths.lib_root}/tree-sitter-c
-    - ${paths.lib_root}/tree-sitter-cpp
-
-
 hydra:
   run:
     dir: ${paths.log_root}/mcpp-${now:%Y-%m-%d-%H-%M-%S}
