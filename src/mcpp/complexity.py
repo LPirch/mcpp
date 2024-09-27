@@ -20,16 +20,13 @@ def c1(root, sitter, lang, calls=None):
     ]
 
     complexity = c2(root, sitter, lang, calls)["C2"]
-    conditions = sitter.captures("Q_CONDITION", root, lang)
-    for condition, tag in conditions:
-        if tag == "condition":
-            bin_expr = sitter.captures("Q_BINARY_EXPR", condition, lang)
-            for expr, _ in bin_expr:
-                if len(expr.children) != 3:
-                    continue
-                left, op, right = expr.children
-                if op.text.decode() in logical_ops:
-                    complexity += 1
+    for condition in sitter.captures("Q_CONDITION", root, lang).get("condition", []):
+        for expr in sitter.captures("Q_BINARY_EXPR", condition, lang).get("expr", []):
+            if len(expr.children) != 3:
+                continue
+            left, op, right = expr.children
+            if op.text.decode() in logical_ops:
+                complexity += 1
     complexity += 1
     return {
         "C1": complexity
@@ -44,7 +41,7 @@ def c2(root, sitter, lang, calls=None):
     })
     complexity = 0
     for query in ("Q_FOR_STMT", "Q_WHILE_STMT"):
-        complexity += len(sitter.captures(query, root, lang))
+        complexity += len(sitter.captures(query, root, lang).get("stmt", []))
     return {
         "C2": complexity
     }
@@ -66,7 +63,7 @@ def c3_c4(root, sitter, lang, calls=None):
     c3_val = 0
     c4_val = 0
     for query in ("Q_FOR_STMT", "Q_DO_STMT", "Q_WHILE_STMT"):
-        for loop_node, _ in sitter.captures(query, root, lang):
+        for loop_node in sitter.captures(query, root, lang).get("stmt", []):
             nesting_level = _loop_nesting_level(loop_node)
             if nesting_level > 0:
                 c3_val += 1

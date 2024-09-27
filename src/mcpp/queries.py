@@ -3,15 +3,15 @@ Q_ERROR_NODE = """
 """
 
 Q_FOR_STMT = """
-(for_statement) @for_stmt
+(for_statement) @stmt
 """
 
 Q_DO_STMT = """
-(do_statement) @do_stmt
+(do_statement) @stmt
 """
 
 Q_WHILE_STMT = """
-(while_statement) @while_stmt
+(while_statement) @stmt
 """
 
 Q_IF_STMT = """
@@ -19,7 +19,7 @@ Q_IF_STMT = """
 """
 
 Q_SWITCH_STMT = """
-(switch_statement) @switch_stmt
+(switch_statement) @stmt
 """
 
 
@@ -30,7 +30,7 @@ Q_CONDITION = """
 """
 
 Q_BINARY_EXPR = """
-(binary_expression) @binary_expression
+(binary_expression) @expr
 """
 
 Q_CALL_NAME = """
@@ -58,7 +58,7 @@ Q_POINTER_EXPR = """
 """
 
 Q_ASSIGNMENT_EXPR = """
-(assignment_expression) @assignment
+(assignment_expression) @expr
 """
 
 Q_IF_WITHOUT_ELSE = """
@@ -66,5 +66,5 @@ Q_IF_WITHOUT_ELSE = """
     condition: ((_) @if)
     consequence: ((_) @then)
     !alternative
-) @if_stmt
+) @stmt
 """

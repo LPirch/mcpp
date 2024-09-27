@@ -23,8 +23,7 @@ class Sitter(object):
         self.queries = {"Q_ERROR_NODE": Q_ERROR_NODE}
 
     def _init_parser(self, language: str):
-        parser = Parser()
-        parser.set_language(self.langs[language])
+        parser = Parser(self.langs[language])
         return parser
 
     def parse_lang(self, source: str, lang: str):
@@ -63,9 +62,8 @@ def get_call_names(sitter, root, lang):
     """ Return all function call names. """
     call_names = []
     sitter.add_queries({"Q_CALL_NAME": Q_CALL_NAME})
-    for node, tag in sitter.captures("Q_CALL_NAME", root, lang):
-        if tag == "name":
-            call_names.append(node.text.decode())
+    for node in sitter.captures("Q_CALL_NAME", root, lang).get("name", []):
+        call_names.append(node.text.decode())
     return call_names
 
 
@@ -73,7 +71,7 @@ def get_identifiers(sitter, root, lang, filter=None):
     """ Return all identifier names, optionally filtered by list of known function names. """
     identifiers = []
     sitter.add_queries({"Q_IDENTIFIER": Q_IDENTIFIER})
-    for node, _ in sitter.captures("Q_IDENTIFIER", root, lang):
+    for node in sitter.captures("Q_IDENTIFIER", root, lang).get("variable", []):
         identifier = node.text.decode()
         if filter is None or identifier not in filter:
             identifiers.append(identifier)
