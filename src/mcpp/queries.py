@@ -22,7 +22,6 @@ Q_SWITCH_STMT = """
 (switch_statement) @stmt
 """
 
-
 Q_CONDITION = """
 (_
     condition: ((_) @condition)
@@ -31,6 +30,14 @@ Q_CONDITION = """
 
 Q_BINARY_EXPR = """
 (binary_expression) @expr
+"""
+
+Q_UPDATE_EXPR = """
+(update_expression) @expr
+"""
+
+Q_SUBSCRIPT_EXPR = """
+(subscript_expression) @expr
 """
 
 Q_CALL_NAME = """
@@ -55,6 +62,11 @@ Q_FUNCTION_PARAMETER = """
 
 Q_POINTER_EXPR = """
 (pointer_expression) @pointer
+"""
+
+Q_POINTER_IDENTIFIER = """
+(pointer_declarator
+    (identifier) @identifier)
 """
 
 Q_ASSIGNMENT_EXPR = """
