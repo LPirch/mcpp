@@ -40,6 +40,10 @@ Q_SUBSCRIPT_EXPR = """
 (subscript_expression) @expr
 """
 
+Q_FIELD_EXPR = """
+(field_expression) @expr
+"""
+
 Q_CALL_NAME = """
 (call_expression
     function: ((identifier) @name)
