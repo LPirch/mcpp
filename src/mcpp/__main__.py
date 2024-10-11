@@ -10,7 +10,7 @@ from tqdm import tqdm
 from mcpp.config import Config
 from mcpp.parse import Sitter, get_call_names
 from mcpp.complexity import c1, c2, c3_c4
-from mcpp.vulnerability import v1, v2, v3_v4, v5, v6_v7, v8, v9, v10, v11
+from mcpp.vulnerability import v1, v2, v3_v4_v5, v6_v7, v8, v9, v10, v11
 
 with files("mcpp.assets") / "config.yaml" as p:
     config_path = str(p.parent)
@@ -24,9 +24,9 @@ METRICS = {
     "C4": c3_c4,
     "V1": v1,
     "V2": v2,
-    "V3": v3_v4,
-    "V4": v3_v4,
-    "V5": v5,
+    "V3": v3_v4_v5,
+    "V4": v3_v4_v5,
+    "V5": v3_v4_v5,
     "V6": v6_v7,
     "V7": v6_v7,
     "V8": v8,
