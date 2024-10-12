@@ -15,12 +15,19 @@ def c1(root, sitter, lang, calls=None):
         "Q_WHILE_STMT": Q_WHILE_STMT
     })
     logical_ops = [
-        "&", "&&",
-        "|", "||"
+        "&&", "||", "and", "or",
+    ]
+    loop_stmts = [
+        "for_statement", "while_statement",
     ]
 
     complexity = c2(root, sitter, lang, calls)["C2"]
+
+    # if statements
     for condition in sitter.captures("Q_CONDITION", root, lang).get("condition", []):
+        if condition.parent.type in loop_stmts:
+            continue
+        complexity += 1
         for expr in sitter.captures("Q_BINARY_EXPR", condition, lang).get("expr", []):
             if len(expr.children) != 3:
                 continue
