@@ -6,6 +6,10 @@ Q_FOR_STMT = """
 (for_statement) @stmt
 """
 
+Q_FOR_RANGE_STMT = """
+(for_range_loop) @stmt
+"""
+
 Q_DO_STMT = """
 (do_statement) @stmt
 """
@@ -60,7 +64,15 @@ Q_IDENTIFIER = """
 (identifier) @variable
 """
 
-Q_FUNCTION_PARAMETER = """
+#Q_FUNCTION_PARAMETER = """
+#(parameter_declaration) @param
+#"""
+
+Q_FUNCTION = """
+(function_definition) @function
+"""
+
+Q_PARAMETER = """
 (parameter_declaration) @param
 """
 

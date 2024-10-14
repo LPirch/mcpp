@@ -1,6 +1,6 @@
 from mcpp.parse import Sitter
 from mcpp.queries import Q_FOR_STMT, Q_DO_STMT, Q_WHILE_STMT, \
-    Q_BINARY_EXPR, Q_CONDITION
+    Q_FOR_RANGE_STMT, Q_DO_STMT, Q_BINARY_EXPR, Q_CONDITION
 
 
 def c1(root, sitter, lang, calls=None):
@@ -12,7 +12,7 @@ def c1(root, sitter, lang, calls=None):
         "Q_CONDITION": Q_CONDITION,
         "Q_FOR_STMT": Q_FOR_STMT,
         "Q_DO_STMT": Q_DO_STMT,
-        "Q_WHILE_STMT": Q_WHILE_STMT
+        "Q_WHILE_STMT": Q_WHILE_STMT,
     })
     logical_ops = [
         "&&", "||", "and", "or",
@@ -42,12 +42,15 @@ def c1(root, sitter, lang, calls=None):
 
 def c2(root, sitter, lang, calls=None):
     """number of for, while and do-while loops"""
-    sitter.add_queries({
+    loops = {
         "Q_FOR_STMT": Q_FOR_STMT,
-        "Q_WHILE_STMT": Q_WHILE_STMT
-    })
+        "Q_FOR_RANGE_STMT": Q_FOR_RANGE_STMT,
+        "Q_WHILE_STMT": Q_WHILE_STMT,
+        "Q_DO_STMT": Q_DO_STMT,
+    } 
+    sitter.add_queries(loops)
     complexity = 0
-    for query in ("Q_FOR_STMT", "Q_WHILE_STMT"):
+    for query in loops.keys():
         complexity += len(sitter.captures(query, root, lang).get("stmt", []))
     return {
         "C2": complexity
@@ -62,14 +65,16 @@ def c3_c4(root, sitter, lang, calls=None):
     - count all loops that have some loop ancestor
     - count ancestors that are also loops
     """
-    sitter.add_queries({
+    loops = {
         "Q_FOR_STMT": Q_FOR_STMT,
+        "Q_FOR_RANGE_STMT": Q_FOR_RANGE_STMT,
         "Q_DO_STMT": Q_DO_STMT,
         "Q_WHILE_STMT": Q_WHILE_STMT
-    })
+    }
+    sitter.add_queries(loops)
     c3_val = 0
     c4_val = 0
-    for query in ("Q_FOR_STMT", "Q_DO_STMT", "Q_WHILE_STMT"):
+    for query in loops.keys():
         for loop_node in sitter.captures(query, root, lang).get("stmt", []):
             nesting_level = _loop_nesting_level(loop_node)
             if nesting_level > 0:
@@ -85,7 +90,8 @@ def _loop_nesting_level(node):
     loop_types = [
         "do_statement",
         "while_statement",
-        "for_statement"
+        "for_statement",
+        "for_range_loop",
     ]
     parent = node.parent
     num_loop_ancestors = 0
