@@ -19,7 +19,7 @@ Q_WHILE_STMT = """
 """
 
 Q_IF_STMT = """
-(if_statement) @if_stmt
+(if_statement) @stmt
 """
 
 Q_SWITCH_STMT = """
