@@ -12,6 +12,7 @@ from mcpp.parse import Sitter, get_call_names
 from mcpp.complexity import c1, c2, c3_c4
 from mcpp.vulnerability import v1, v2, v3_v4_v5, v6_v7, v8, v9, v10, v11
 from mcpp.erik import x1, x2, x3, t1, t2, t3, s1, s2, s3, s4
+from mcpp.felix import x4, m1, m2
 
 if True:
     p = files("mcpp.assets") / "config.yaml"
@@ -38,6 +39,7 @@ METRICS = {
     "x1": x1,
     "x2": x2,
     "x3": x3,
+    "x4": x4,
     "t1": t1,
     "t2": t2,
     "t3": t3,
@@ -45,6 +47,8 @@ METRICS = {
     "s2": s2,
     "s3": s3,
     "s4": s4,
+    "m1": m1,
+    "m2": m2,
 }
 
 

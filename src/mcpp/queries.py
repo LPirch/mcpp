@@ -64,6 +64,10 @@ Q_IDENTIFIER = """
 (identifier) @variable
 """
 
+Q_NUMBER = """
+(number_literal) @constant
+"""
+
 #Q_FUNCTION_PARAMETER = """
 #(parameter_declaration) @param
 #"""
@@ -95,4 +99,8 @@ Q_IF_WITHOUT_ELSE = """
     consequence: ((_) @then)
     !alternative
 ) @stmt
+"""
+
+Q_NEW_EXPRESSION = """
+(new_expression) @expr
 """
