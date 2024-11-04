@@ -1,27 +1,4 @@
-from mcpp.parse import Sitter
-from mcpp.queries import Q_BINARY_EXPR, Q_IDENTIFIER, Q_NUMBER, Q_CALL_NAME, Q_NEW_EXPRESSION, Q_SUBSCRIPT_EXPR, Q_FIELD_EXPR
-
-
-def x4(root, sitter, lang, calls=None):
-    """ Max # of operands in expression
-    """
-    sitter.add_queries({
-        "Q_BINARY_EXPR": Q_BINARY_EXPR,
-        "Q_IDENTIFIER": Q_IDENTIFIER,
-        "Q_NUMBER": Q_NUMBER,
-    })
-
-    num_ops = [0]
-
-    for expr in sitter.captures("Q_BINARY_EXPR", root, lang).get("expr", []):
-        identifiers = sitter.captures("Q_IDENTIFIER", expr, lang).get("variable", [])
-        constants = sitter.captures("Q_NUMBER", expr, lang).get("constant", [])
-        num_ops.append(len(identifiers) + len(constants))
-
-    return {
-        "x4": max(num_ops),
-    }
-
+from mcpp.queries import Q_CALL_NAME, Q_NEW_EXPRESSION, Q_SUBSCRIPT_EXPR, Q_FIELD_EXPR
 
 def m1(root, sitter, lang, calls=None):
     """ # memory allocations
