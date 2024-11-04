@@ -28,7 +28,10 @@ def s2(root, sitter, lang, calls=None):
 def s3(root, sitter, lang, calls=None):
     QUERY = "(declaration (init_declarator (function_declarator) @decl))"
     sitter.add_queries({"Q_FUNCTION_POINTERS": QUERY})
+    QUERY = "(parameter_declaration (function_declarator) @decl)"
+    sitter.add_queries({"Q_FUNCTION_POINTER_PARAMS": QUERY})
     function_pointers = sitter.captures("Q_FUNCTION_POINTERS", root, lang).get("decl", [])
+    function_pointers += sitter.captures("Q_FUNCTION_POINTER_PARAMS", root, lang).get("decl", [])
     return {
         "s3": len(function_pointers)
     }
