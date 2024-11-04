@@ -3,12 +3,14 @@ def s1(root, sitter, lang, calls=None):
     sitter.add_queries({"Q_NUMBER_LITERAL": QUERY})
     number_literals = sitter.captures("Q_NUMBER_LITERAL", root, lang).get("num", [])
     number_literals = [node.text.decode("utf8") for node in number_literals]
-    number_literals = [
-        int(s)
-        for s in number_literals
-        if s.isnumeric() or ((s.startswith("+") or s.startswith("-")) and s[1:].isnumeric())]
+    def parse_int(s):
+        try:
+            return int(s, 0)
+        except:
+            return None
+    number_literals = [parse_int(s) for s in number_literals]
     # only non-trivial constants
-    number_literals = [x for x in number_literals if x not in [-1, 0, 1]]
+    number_literals = [x for x in number_literals if x is not None and x not in [-1, 0, 1]]
     return {
         "s1": len(number_literals)
     }
