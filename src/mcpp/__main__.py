@@ -11,8 +11,10 @@ from mcpp.config import Config
 from mcpp.parse import Sitter, get_call_names
 from mcpp.complexity import c1, c2, c3_c4
 from mcpp.vulnerability import v1, v2, v3_v4_v5, v6_v7, v8, v9, v10, v11
+from mcpp.erik import x1, x2, x3, t1, t2, t3, s1, s2, s3, s4
 
-with files("mcpp.assets") / "config.yaml" as p:
+if True:
+    p = files("mcpp.assets") / "config.yaml"
     config_path = str(p.parent)
     config_name = str(p.name)
 
@@ -32,7 +34,17 @@ METRICS = {
     "V8": v8,
     "V9": v9,
     "V10": v10,
-    "V11": v11
+    "V11": v11,
+    "x1": x1,
+    "x2": x2,
+    "x3": x3,
+    "t1": t1,
+    "t2": t2,
+    "t3": t3,
+    "s1": s1,
+    "s2": s2,
+    "s3": s3,
+    "s4": s4,
 }
 
 
