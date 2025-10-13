@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from typing import List
 from collections import defaultdict
-from importlib.resources import files
+from importlib.resources import files, as_file
 
 import hydra
 from tqdm import tqdm
@@ -10,9 +10,14 @@ from tqdm import tqdm
 from mcpp.config import Config
 from mcpp.parse import Sitter, get_call_names
 from mcpp.complexity import c1, c2, c3_c4
-from mcpp.vulnerability import v1, v2, v3_v4, v5, v6_v7, v8, v9, v10, v11
+from mcpp.vulnerability import v1, v2, v3_v4_v5, v6_v7, v8, v9, v10, v11
 
-with files("mcpp.assets") / "config.yaml" as p:
+from mcpp.additional import x1, x2, x3, x4
+from mcpp.tree import t1, t2, t3
+from mcpp.smell import s1, s2, s3, s4
+from mcpp.memory import m1, m2
+
+with as_file(files("mcpp.assets") / "config.yaml") as p:
     config_path = str(p.parent)
     config_name = str(p.name)
 
@@ -24,15 +29,28 @@ METRICS = {
     "C4": c3_c4,
     "V1": v1,
     "V2": v2,
-    "V3": v3_v4,
-    "V4": v3_v4,
-    "V5": v5,
+    "V3": v3_v4_v5,
+    "V4": v3_v4_v5,
+    "V5": v3_v4_v5,
     "V6": v6_v7,
     "V7": v6_v7,
     "V8": v8,
     "V9": v9,
     "V10": v10,
-    "V11": v11
+    "V11": v11,
+    "x1": x1,
+    "x2": x2,
+    "x3": x3,
+    "x4": x4,
+    "t1": t1,
+    "t2": t2,
+    "t3": t3,
+    "s1": s1,
+    "s2": s2,
+    "s3": s3,
+    "s4": s4,
+    "m1": m1,
+    "m2": m2,
 }
 
 
