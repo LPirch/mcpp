@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from typing import List
 from collections import defaultdict
-from importlib.resources import files
+from importlib.resources import files, as_file
 
 import hydra
 from tqdm import tqdm
@@ -17,8 +17,7 @@ from mcpp.tree import t1, t2, t3
 from mcpp.smell import s1, s2, s3, s4
 from mcpp.memory import m1, m2
 
-if True:
-    p = files("mcpp.assets") / "config.yaml"
+with as_file(files("mcpp.assets") / "config.yaml") as p:
     config_path = str(p.parent)
     config_name = str(p.name)
 
