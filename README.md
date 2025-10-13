@@ -43,6 +43,23 @@ See also the corresponding [repo](https://github.com/wsbrg/crashminer).
 |                         | V10 | number of if structures without else                                      |
 |                         | V11 | number of variables involved in control predicates                        |
 
+## Additional Metrics
+
+| Dimension         | ID | Metric Description                                      |
+|-------------------|----|---------------------------------------------------------|
+| XD: Extra         | x1 | number of return statements                             |
+|                   | x2 | number of cast expressions                              |
+|                   | x3 | number of variable declarations                         |
+|                   | x4 | maximum number of operands in an expression             |
+| TD: AST Structure | t1 | number of AST nodes (descendants)                       |
+|                   | t2 | height of the AST                                       |
+|                   | t3 | average branching factor of the AST                     |
+| SD: Code Smells   | s1 | number of non-trivial numeric constants (magic numbers) |
+|                   | s2 | number of goto statements                               |
+|                   | s3 | number of function pointers                             |
+|                   | s4 | number of function calls without return value usage     |
+| MD: Memory Ops    | m1 | number of memory allocations (malloc, alloc, new, etc.) |
+|                   | m2 | number of pointer dereferences (`*`, `[]`, `->`)        |
 
 
 ## Setup
