@@ -1,6 +1,5 @@
-from mcpp.parse import Sitter
 from mcpp.queries import Q_FOR_STMT, Q_DO_STMT, Q_WHILE_STMT, \
-    Q_FOR_RANGE_STMT, Q_DO_STMT, Q_BINARY_EXPR, Q_CONDITION
+    Q_FOR_RANGE_STMT, Q_BINARY_EXPR, Q_CONDITION
 
 
 def c1(root, sitter, lang, calls=None):

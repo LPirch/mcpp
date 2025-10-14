@@ -1,8 +1,6 @@
-from dataclasses import dataclass
 from pathlib import Path
-from importlib.resources import files
 
-from tree_sitter import Language, Parser
+from tree_sitter import Language, Parser, QueryCursor
 import tree_sitter_c as ts_c
 import tree_sitter_cpp as ts_cpp
 
@@ -48,14 +46,16 @@ class Sitter(object):
 
     def _count_error_nodes(self, tree, lang):
         query = self.langs[lang].query(self.queries["Q_ERROR_NODE"])
-        return len(query.captures(tree.root_node))
+        cursor = QueryCursor(query)
+        return len(cursor.captures(tree.root_node))
 
     def add_queries(self, queries):
         self.queries.update(queries)
 
     def captures(self, query, node, lang):
         lang = self.langs[lang]
-        return lang.query(self.queries[query]).captures(node)
+        cursor = QueryCursor(lang.query(self.queries[query]))
+        return cursor.captures(node)
 
 
 def get_call_names(sitter, root, lang):

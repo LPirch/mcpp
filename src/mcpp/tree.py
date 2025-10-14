@@ -1,7 +1,7 @@
 def t1(root, sitter, lang, calls=None):
     def num_descendants(node):
         return 1 + sum(map(num_descendants, node.children))
-    
+
     return {
         "t1": num_descendants(root)
     }

@@ -3,6 +3,7 @@ def s1(root, sitter, lang, calls=None):
     sitter.add_queries({"Q_NUMBER_LITERAL": QUERY})
     number_literals = sitter.captures("Q_NUMBER_LITERAL", root, lang).get("num", [])
     number_literals = [node.text.decode("utf8") for node in number_literals]
+
     def parse_int(s):
         try:
             return int(s, 0)

@@ -1,5 +1,6 @@
 from mcpp.queries import Q_BINARY_EXPR, Q_IDENTIFIER, Q_NUMBER
 
+
 def x1(root, sitter, lang, calls=None):
     QUERY = "(return_statement) @stmt"
     sitter.add_queries({"Q_RETURN_STMT": QUERY})
@@ -7,6 +8,7 @@ def x1(root, sitter, lang, calls=None):
     return {
         "x1": len(return_statements)
     }
+
 
 def x2(root, sitter, lang, calls=None):
     QUERY = "(cast_expression) @expr"
@@ -16,6 +18,7 @@ def x2(root, sitter, lang, calls=None):
         "x2": len(cast_exprs)
     }
 
+
 def x3(root, sitter, lang, calls=None):
     QUERY = "(declaration) @stmt"
     sitter.add_queries({"Q_VAR_DECL": QUERY})
@@ -23,6 +26,7 @@ def x3(root, sitter, lang, calls=None):
     return {
         "x3": len(var_decls)
     }
+
 
 def x4(root, sitter, lang, calls=None):
     """ Max # of operands in expression
