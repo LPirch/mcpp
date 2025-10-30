@@ -14,7 +14,7 @@ LANGS = {
 
 
 class Sitter(object):
-    def __init__(self, lib_path: Path, *languages):
+    def __init__(self, *languages):
         self.langs = {k:v for k, v in LANGS.items() if k in languages}
         self.parser = {lang: self._init_parser(lang) for lang in languages}
         self.queries = {}
