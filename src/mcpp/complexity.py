@@ -43,10 +43,12 @@ def c2(root, sitter, lang, calls=None):
     """number of for, while and do-while loops"""
     loops = {
         "Q_FOR_STMT": Q_FOR_STMT,
-        "Q_FOR_RANGE_STMT": Q_FOR_RANGE_STMT,
         "Q_WHILE_STMT": Q_WHILE_STMT,
         "Q_DO_STMT": Q_DO_STMT,
-    } 
+    }
+    if lang == "cpp":
+        loops.update({"Q_FOR_RANGE_STMT": Q_FOR_RANGE_STMT})
+        
     sitter.add_queries(loops)
     complexity = 0
     for query in loops.keys():
@@ -66,10 +68,12 @@ def c3_c4(root, sitter, lang, calls=None):
     """
     loops = {
         "Q_FOR_STMT": Q_FOR_STMT,
-        "Q_FOR_RANGE_STMT": Q_FOR_RANGE_STMT,
         "Q_DO_STMT": Q_DO_STMT,
         "Q_WHILE_STMT": Q_WHILE_STMT
     }
+    if lang == "cpp":
+        loops.update({"Q_FOR_RANGE_STMT": Q_FOR_RANGE_STMT})
+        
     sitter.add_queries(loops)
     c3_val = 0
     c4_val = 0
