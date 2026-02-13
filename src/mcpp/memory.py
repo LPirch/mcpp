@@ -1,4 +1,7 @@
-from mcpp.queries import Q_CALL_NAME, Q_NEW_EXPRESSION, Q_SUBSCRIPT_EXPR, Q_FIELD_EXPR
+import tree_sitter
+
+from mcpp.queries import Q_CALL_NAME, Q_NEW_EXPRESSION, Q_SUBSCRIPT_EXPR, Q_FIELD_EXPR, Q_POINTER_EXPR
+
 
 def m1(root, sitter, lang, calls=None):
     """ # memory allocations
@@ -18,20 +21,23 @@ def m1(root, sitter, lang, calls=None):
             num_allocations += 1
 
     # Number of new object instantiations
-    num_new_expressions = len(sitter.captures("Q_NEW_EXPRESSION", root, lang).get("expr", []))
-    
+    try:
+        num_new_expressions = len(sitter.captures("Q_NEW_EXPRESSION", root, lang).get("expr", []))
+    except tree_sitter.QueryError:
+        num_new_expressions = 0
+
     return {
         "m1": num_allocations + num_new_expressions,
     }
+
 
 def m2(root, sitter, lang, calls=None):
     """ # ptr dereferences
     """
     sitter.add_queries({
-        "Q_CALL_NAME": Q_CALL_NAME,
-        "Q_NEW_EXPRESSION": Q_NEW_EXPRESSION,
         "Q_SUBSCRIPT_EXPR": Q_SUBSCRIPT_EXPR,
         "Q_FIELD_EXPR": Q_FIELD_EXPR,
+        "Q_POINTER_EXPR": Q_POINTER_EXPR,
     })
 
     num_ptr_expressions = 0
@@ -46,7 +52,7 @@ def m2(root, sitter, lang, calls=None):
 
     # Number of pointer dereferences using the field expression syntax (ptr->field)
     num_field_expressions = len(sitter.captures("Q_FIELD_EXPR", root, lang).get("expr", []))
-    
+
     return {
         "m2": num_ptr_expressions + num_subscript_expressions + num_field_expressions,
     }
