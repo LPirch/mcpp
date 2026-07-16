@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from tree_sitter import Language, Parser, QueryCursor
+from tree_sitter import Language, Parser, Query, QueryCursor
 import tree_sitter_c as ts_c
 import tree_sitter_cpp as ts_cpp
 
@@ -19,6 +19,7 @@ class Sitter(object):
         self.parser = {lang: self._init_parser(lang) for lang in languages}
         self.queries = {}
         self.queries = {"Q_ERROR_NODE": Q_ERROR_NODE}
+        self._compiled = {}  # (lang, query_name) -> compiled Query, cached
 
     def _init_parser(self, language: str):
         parser = Parser(self.langs[language])
@@ -44,17 +45,21 @@ class Sitter(object):
         with open(path, "r") as f:
             return self.parse(f.read())
 
+    def _get_query(self, lang: str, query_name: str):
+        key = (lang, query_name)
+        if key not in self._compiled:
+            self._compiled[key] = Query(self.langs[lang], self.queries[query_name])
+        return self._compiled[key]
+
     def _count_error_nodes(self, tree, lang):
-        query = self.langs[lang].query(self.queries["Q_ERROR_NODE"])
-        cursor = QueryCursor(query)
+        cursor = QueryCursor(self._get_query(lang, "Q_ERROR_NODE"))
         return len(cursor.captures(tree.root_node))
 
     def add_queries(self, queries):
         self.queries.update(queries)
 
     def captures(self, query, node, lang):
-        lang = self.langs[lang]
-        cursor = QueryCursor(lang.query(self.queries[query]))
+        cursor = QueryCursor(self._get_query(lang, query))
         return cursor.captures(node)
 
 

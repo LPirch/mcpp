@@ -1,5 +1,3 @@
-import tree_sitter
-
 from mcpp.queries import Q_CALL_NAME, Q_NEW_EXPRESSION, Q_SUBSCRIPT_EXPR, Q_FIELD_EXPR, Q_POINTER_EXPR
 
 
@@ -20,11 +18,13 @@ def m1(root, sitter, lang, calls=None):
         if "alloc" in name.text.decode("utf-8").lower():
             num_allocations += 1
 
-    # Number of new object instantiations
-    try:
+    # Number of new object instantiations. 'new_expression' only exists in the C++
+    # grammar, so this must never be queried against the C language: tree-sitter 0.26.0
+    # corrupts the query source string in place when a Query() compile fails, which
+    # would then break every other use of Q_NEW_EXPRESSION for the rest of the process.
+    num_new_expressions = 0
+    if lang == "cpp":
         num_new_expressions = len(sitter.captures("Q_NEW_EXPRESSION", root, lang).get("expr", []))
-    except tree_sitter.QueryError:
-        num_new_expressions = 0
 
     return {
         "m1": num_allocations + num_new_expressions,
